@@ -1,14 +1,18 @@
 import React from 'react';
-import { Route, IndexRoute } from 'react-router';
+import { Switch, Route } from 'react-router-dom';
 import App from './components/App';
 import AboutPage from './components/about/AboutPage';
 import HomePage from './components/home/HomePage';
 import CoursesPage from './components/course/CoursesPage';
 
-export default (
-    <Route path="/" component={App}>
-        <IndexRoute component={HomePage} />
-        <Route path="about" component={AboutPage} />
-        <Route path="courses" component={CoursesPage} />
-    </Route>
-);
+const Routes = () => {
+    return (
+        <Switch>
+            <Route exact path="/" component={HomePage} />
+            <Route exact path="/about" component={AboutPage} />
+            <Route exact path="/courses" component={CoursesPage} />
+        </Switch>
+    );
+};
+
+export default Routes;

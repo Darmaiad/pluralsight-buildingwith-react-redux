@@ -5,10 +5,27 @@
     ],
     "env": {
         "development": {
-            "presets": [
-                "react-hmre"
+            "plugins": [
+                [
+                    "react-transform",
+                    {
+                        "transforms": [
+                            {
+                                "transform": "react-transform-hmr",
+                                "imports": [
+                                    "react"
+                                ],
+                                "locals": [
+                                    "module"
+                                ]
+                            }
+                        ]
+                    }
+                ]
             ]
         }
     },
-    "plugins": ["transform-object-rest-spread"]
+    "plugins": [
+        "transform-object-rest-spread"
+    ]
 }

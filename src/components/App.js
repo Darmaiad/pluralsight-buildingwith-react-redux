@@ -1,18 +1,24 @@
-import React, {PropTypes} from 'react';
-import { Link } from 'react-router';
+import React from 'react';
+import PropTypes from 'prop-types';
 import Header from './common/Header';
+import Routes from './../routes';
+import { Switch, Route } from 'react-router-dom';
+import AboutPage from './about/AboutPage';
+
 
 export default class App extends React.Component {
     render () {
         return (
             <div className="container-fluid">
                 <Header />
-                {this.props.children}
+                <Routes />
+                {/* <Route path="/about" component={AboutPage} /> */}
+
             </div>
         );
     }
 }
 
 App.propTypes = {
-    children: PropTypes.object.isRequired,
+    // children: PropTypes.object.isRequired,
 };
