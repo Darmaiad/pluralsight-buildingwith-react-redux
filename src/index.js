@@ -1,14 +1,15 @@
-import 'babel-polyfill'; // Should import only the polyfiils for the features we need.
+// Polyfills should ALWAYS be on the top of the top level component
+import 'babel-polyfill'; // Should import only the Polyfills for the features we need.
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import configureStore from './store/configureStore';
+import App from './components/App';
 
 // Webpack can import CSS files too
 import './styles/styles.css';
 import './../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import App from './components/App';
 
 const store = configureStore();
 

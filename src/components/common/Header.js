@@ -1,8 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
+// Exact parameter in NavLink is needed in order for activeClassName to work correctly
 const Header = () => {
-// const Header = ({ loading }) => {
     return (
         <nav>
             <NavLink exact to="/" activeClassName="active">Home</NavLink>
