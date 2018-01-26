@@ -73,4 +73,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 // If we ommit mapDispatchToProps the component gets a dispatch prop from connect
-export default connect(mapStateToProps)(CoursesPage);
+export default connect(mapStateToProps, mapDispatchToProps)(CoursesPage);
