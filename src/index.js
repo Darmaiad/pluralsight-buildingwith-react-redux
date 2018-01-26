@@ -10,7 +10,7 @@ import App from './components/App';
 // Webpack can import CSS files too
 import './styles/styles.css';
 import './../node_modules/bootstrap/dist/css/bootstrap.min.css';
-
+import './favicon.ico';
 const store = configureStore();
 
 render(
