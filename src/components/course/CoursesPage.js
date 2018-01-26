@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { bindActionCreators} from 'redux';
 import { connect } from 'react-redux';
 import * as courseActions from '../../actions/courseActions';
 
@@ -26,8 +27,7 @@ class CoursesPage extends React.Component {
     }
 
     onClickSave() {
-        // Dispatch was passed by connect() because it found no mapDispatchToProps
-        this.props.createCourse(this.state.course);
+        this.props.actions.createCourse(this.state.course);
     }
 
     courseRow(course, index) {
@@ -56,19 +56,22 @@ class CoursesPage extends React.Component {
 }
 
 CoursesPage.propTypes = {
-    createCourse: PropTypes.func,
-    courses: PropTypes.array,
+    actions: PropTypes.object.isRequired,
+    courses: PropTypes.array.isRequired,
 };
 
+// These names are optional. We can na me these functions whatever we like
 function mapStateToProps(state, ownProps) {
     return {
         courses: state.courses,
     };
 }
-
 function mapDispatchToProps(dispatch) {
     return {
-        createCourse: (course) => dispatch(courseActions.createCourse(course)),
+
+        // createCourse: (course) => dispatch(courseActions.createCourse(course)),
+        // Instead of the above, we can do this: 
+        actions: bindActionCreators (courseActions, dispatch),
     };
 }
 
