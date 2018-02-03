@@ -6,12 +6,17 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import configureStore from './store/configureStore';
 import App from './components/App';
+import {loadCourses} from './actions/courseActions';
 
 // Webpack can import CSS files too
 import './styles/styles.css';
 import './../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './favicon.ico';
 const store = configureStore();
+
+// The store is configured above. 
+// Once the store is configured we can dispatch actions against it.
+store.dispatch(loadCourses());
 
 render(
     <Provider store={store}>

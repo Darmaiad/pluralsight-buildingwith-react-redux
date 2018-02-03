@@ -3,32 +3,11 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as courseActions from '../../actions/courseActions';
+import CourseList from './CourseList';
 
 class CoursesPage extends React.Component {
     constructor(props, context) {
         super(props, context);
-        this.state = {
-            course: {
-                title: '',
-            },
-        };
-
-        // You can use bind when you specify the callback in the input,
-        // but it will create a new function each render
-        this.onTitleChange = this.onTitleChange.bind(this);
-        this.onClickSave = this.onClickSave.bind(this);
-    }
-
-    onTitleChange(e) {
-        const course = this.state.course;
-        course.title = e.target.value;
-        this.setState({
-            course,
-        });
-    }
-
-    onClickSave() {
-        this.props.actions.createCourse(this.state.course);
     }
 
     courseRow(course, index) {
@@ -39,25 +18,15 @@ class CoursesPage extends React.Component {
         return (
             <div>
                 <h1>Courses Page</h1>
-                {this.props.courses.map(this.courseRow)}
-                <h2>Add Course</h2>
-                <input
-                    type="text"
-                    onChange={this.onTitleChange}
-                    value={this.state.course.title}
-                />
-                <input
-                    type="submit"
-                    onClick={this.onClickSave}
-                    value="Save"
-                />
+                {/* {this.props.courses.map(this.courseRow)} */}
+                <CourseList courses={this.props.courses}/>
             </div>
         );
     }
 }
 
-
-// These two function names are optional. We can na me these functions whatever we like, or even define them inline
+// These two function names are optional. We can na me these functions whatever we like, 
+// or even define them inline as anonymous functions
 function mapStateToProps(state, ownProps) {
     return {
         courses: state.courses,
