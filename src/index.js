@@ -7,6 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 import configureStore from './store/configureStore';
 import App from './components/App';
 import {loadCourses} from './actions/courseActions';
+import {loadAuthors} from './actions/authorActions';
 
 // Webpack can import CSS files too
 import './styles/styles.css';
@@ -17,6 +18,7 @@ const store = configureStore();
 // The store is configured above. 
 // Once the store is configured we can dispatch actions against it.
 store.dispatch(loadCourses());
+store.dispatch(loadAuthors());
 
 render(
     <Provider store={store}>

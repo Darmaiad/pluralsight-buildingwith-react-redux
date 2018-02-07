@@ -4,12 +4,10 @@ import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
 import thunk from 'redux-thunk';
 import rootReducer from './../reducers/index';
 
+const configureStore = (initialState) => createStore(
+    rootReducer,
+    initialState,
+    applyMiddleware(thunk, reduxImmutableStateInvariant()) // check if ENV === DEV
+);
 
-
-export default function configureStore(initialState) {
-    return createStore(
-        rootReducer,
-        initialState,
-        applyMiddleware(thunk, reduxImmutableStateInvariant()) // check if ENV === DEV
-    );
-}
+export default configureStore;
