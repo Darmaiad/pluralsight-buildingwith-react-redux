@@ -1,6 +1,7 @@
 import courseApi from '../api/mockCourseApi';
 import * as types from './actionTypes';
 import { beginAjaxCall } from './ajaxStatusActions';
+import { ajaxCallError } from './ajaxStatusActions';
 
 export const loadCoursesSuccess = (courses) => ({
     type: types.LOAD_COURSES_SUCCESS,
@@ -33,6 +34,7 @@ export const saveCourse = (course) => (dispatch) => {
         course.id ? dispatch(updateCourseSuccess(savedCourse)) : // If there is a course id We are updating a course and we dispatch update 
             dispatch(createCourseSuccess(savedCourse)); // If there is no course id the course is new, so we dispatch create
     }).catch((error) => {
+        dispatch(ajaxCallError());
         throw (error);
     });
 };

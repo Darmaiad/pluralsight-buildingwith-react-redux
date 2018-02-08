@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as courseActions from '../../actions/courseActions';
 import CourseForm from './CourseForm';
-// import toastr from 'toastr';
+import {toastr} from 'react-redux-toastr';
 
 class ManageCoursePage extends React.Component {
     constructor(props) {
@@ -14,7 +14,7 @@ class ManageCoursePage extends React.Component {
             // Assigning a copy so that the reference does not get passed around
             course: { ...this.props.course },
             errors: {},
-            // saving: false,
+            saving: false,
         };
 
         this.updateCourseState = this.updateCourseState.bind(this);
@@ -39,22 +39,20 @@ class ManageCoursePage extends React.Component {
 
     saveCourse(event) {
         event.preventDefault();
-        // this.setState({ saving: true });
-        this.props.actions.saveCourse(this.state.course);
-        // .then(() => this.redirect())
-        // .catch(error => {
-        //     toastr.error(error);
-        //     this.setState({ saving: false });
-        // });
-        // <Redirect push to="/courses"/>;
-        this.context.router.history.push('/courses');
+        this.setState({ saving: true });
+        this.props.actions.saveCourse(this.state.course)
+        .then(() => this.redirect())
+        .catch(error => {
+            toastr.error(error);
+            this.setState({ saving: false });
+        });
     }
 
-    // redirect() {
-    //     this.setState({ saving: false });
-    //     toastr.success('Course saved');
-    //     this.context.router.push('/courses');
-    // }
+    redirect() {
+        this.setState({ saving: false });
+        toastr.success('Course saved');
+        this.context.router.history.push('/courses');
+    }
 
     render() {
         return (
@@ -63,7 +61,7 @@ class ManageCoursePage extends React.Component {
                 onChange={this.updateCourseState}
                 onSave={this.saveCourse}
                 errors={this.state.errors}
-                // saving={this.state.saving}
+                saving={this.state.saving}
                 course={this.state.course}
             />
         );

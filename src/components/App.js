@@ -4,12 +4,14 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import Header from './common/Header';
 import Routes from './../routes';
+import ReduxToastr from 'react-redux-toastr';
 
 class App extends React.Component {
-    render () {
+    render() {
         return (
             <div className="container-fluid">
-                <Header loading = {this.props.loading} />
+                <ReduxToastr />
+                <Header loading={this.props.loading} />
                 <Routes />
             </div>
         );

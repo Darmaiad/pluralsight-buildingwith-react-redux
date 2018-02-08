@@ -9,7 +9,7 @@ import App from './components/App';
 import {loadCourses} from './actions/courseActions';
 import {loadAuthors} from './actions/authorActions';
 
-// Webpack can import CSS files too
+// Webpack can import CSS and Graphics files too
 import './styles/styles.css';
 import './../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './favicon.ico';
