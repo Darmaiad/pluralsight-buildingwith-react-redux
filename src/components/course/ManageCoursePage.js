@@ -25,15 +25,9 @@ class ManageCoursePage extends React.Component {
     // We need to make a check in the beginning so that we don't make useless state updates
     componentWillReceiveProps(nextProps) {
         if (this.props.course.id != nextProps.course.id) {
-            this.setState({ course: Object.assign({}, nextProps.course) });
+            this.setState({ course: {...nextProps.course} });
         }
     }
-
-    // componentWillReceiveProps(nextProps) {
-    //     if (this.props.course.id != nextProps.course.id) {
-    //         this.setState({ course: Object.assign({}, nextProps.course) });
-    //     }
-    // }
 
     updateCourseState(event) {
         const field = event.target.name;
@@ -86,22 +80,24 @@ ManageCoursePage.propTypes = {
     actions: PropTypes.object.isRequired,
 };
 
-
-function getCourseById(courses, id) {
+   
+// const getCourseById = (courses, id) => {
+//     const course = courses.filter(course => course.id == id);
+//     if (course.length) return course[0];
+//     return null;
+// };
+const getCourseById = (courses, id) => {
     const course = courses.filter(course => course.id == id);
-    if (course.length) return course[0];
-    return null;
-}
+    return course.length ? course[0] : null;
+};
 
 const mapStateToProps = (state, ownProps) => {
     const courseId = ownProps.match.params.id;
-
 
     // Initialize course in order to show an empty form when you add a new course
     let course = { id: '', watchHref: '', title: '', authorId: '', length: '', category: '' };
 
     if (courseId && state.courses.length > 0) {
-
         // If the courseId exists, fetch the course we want to edit
         course = getCourseById(state.courses, courseId);
     }

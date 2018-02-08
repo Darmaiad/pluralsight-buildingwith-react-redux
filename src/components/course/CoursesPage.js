@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as courseActions from '../../actions/courseActions';
 import CourseList from './CourseList';
-import { Redirect } from 'react-router-dom';
 
 class CoursesPage extends React.Component {
     constructor(props) {
@@ -12,19 +11,21 @@ class CoursesPage extends React.Component {
         this.redirectToAddCoursePage = this.redirectToAddCoursePage.bind(this);
     }
 
-    redirectToAddCoursePage(){
+    redirectToAddCoursePage() {
         this.context.router.history.push('/course');
     }
 
     render() {
         return (
             <div>
-                <h1>Courses Page</h1>
+                <div className="row">
+                    <h1>Courses Page</h1>
+                </div>
                 <input type="submit"
-                       value="Add Course"
-                       className="btn btn-primary"
-                       onClick={this.redirectToAddCoursePage}/>
-                <CourseList courses={this.props.courses}/>     
+                    value="Add Course"
+                    className="btn btn-primary"
+                    onClick={this.redirectToAddCoursePage} />
+                <CourseList courses={this.props.courses} />
             </div>
         );
     }
@@ -32,18 +33,17 @@ class CoursesPage extends React.Component {
 
 // These two function names are optional. We can name these functions whatever we like, 
 // or even define them inline as anonymous functions
-function mapStateToProps(state, ownProps) {
+const mapStateToProps = (state, ownProps) => { 
     return {
         courses: state.courses,
     };
-}
-function mapDispatchToProps(dispatch) {
-    return {
-        // createCourse: (course) => dispatch(courseActions.createCourse(course)),
-        // Instead of the above, we can do this: 
-        actions: bindActionCreators(courseActions, dispatch),
-    };
-}
+};
+
+const mapDispatchToProps = (dispatch) => ({
+    // createCourse: (course) => dispatch(courseActions.createCourse(course)),
+    // Instead of the above, we can do this: 
+    actions: bindActionCreators(courseActions, dispatch),
+});
 
 CoursesPage.contextTypes = {
     router: PropTypes.object,
