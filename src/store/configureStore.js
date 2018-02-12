@@ -1,13 +1,5 @@
-import { createStore, applyMiddleware } from 'redux';
-// This middleware should check that process.env.NODE_ENV is set to development before it is applied
-import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
-import thunk from 'redux-thunk';
-import rootReducer from './../reducers/index';
-
-const configureStore = (initialState) => createStore(
-    rootReducer,
-    initialState,
-    applyMiddleware(thunk, reduxImmutableStateInvariant()) // check if ENV === DEV
-);
-
-export default configureStore;
+if (process.env.NODE_ENV === 'production') {
+    module.exports = require('./configureStore.prod');
+} else {
+    module.exports = require('./configureStore.dev');
+}
