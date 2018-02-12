@@ -2,11 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { toastr } from 'react-redux-toastr';
 import * as courseActions from '../../actions/courseActions';
 import CourseForm from './CourseForm';
-import {toastr} from 'react-redux-toastr';
+import { authorsFormattedForDropdown } from './../../selectors/selectors';
 
-class ManageCoursePage extends React.Component {
+// While we export default the connected component at the bottom, we also export the class here
+// so we can import it as a named import when testing
+export class ManageCoursePage extends React.Component {
     constructor(props) {
         super(props);
 
@@ -25,7 +28,7 @@ class ManageCoursePage extends React.Component {
     // We need to make a check in the beginning so that we don't make useless state updates
     componentWillReceiveProps(nextProps) {
         if (this.props.course.id != nextProps.course.id) {
-            this.setState({ course: {...nextProps.course} });
+            this.setState({ course: { ...nextProps.course } });
         }
     }
 
@@ -37,15 +40,33 @@ class ManageCoursePage extends React.Component {
         }));
     }
 
+    courseFormIsValid() {
+        let formIsValid = true;
+        let errors = {};
+
+        if (this.state.course.title < 5) {
+            errors.title = 'Title must be at least 5 characters';
+            formIsValid = false;
+        }
+
+        this.setState({ errors: errors });
+        return formIsValid;
+    }
+
     saveCourse(event) {
         event.preventDefault();
+
+        if (!this.courseFormIsValid()) {
+            return;
+        }
+
         this.setState({ saving: true });
         this.props.actions.saveCourse(this.state.course)
-        .then(() => this.redirect())
-        .catch(error => {
-            toastr.error(error);
-            this.setState({ saving: false });
-        });
+            .then(() => this.redirect())
+            .catch(error => {
+                toastr.error(error);
+                this.setState({ saving: false });
+            });
     }
 
     redirect() {
@@ -78,12 +99,6 @@ ManageCoursePage.propTypes = {
     actions: PropTypes.object.isRequired,
 };
 
-   
-// const getCourseById = (courses, id) => {
-//     const course = courses.filter(course => course.id == id);
-//     if (course.length) return course[0];
-//     return null;
-// };
 const getCourseById = (courses, id) => {
     const course = courses.filter(course => course.id == id);
     return course.length ? course[0] : null;
@@ -100,14 +115,9 @@ const mapStateToProps = (state, ownProps) => {
         course = getCourseById(state.courses, courseId);
     }
 
-    const authorsFormattedForDropdown = state.authors.map((author) => ({
-        value: author.id,
-        text: author.firstName + ' ' + author.lastName,
-    }));
-
     return {
         course: course,
-        authors: authorsFormattedForDropdown,
+        authors: authorsFormattedForDropdown(state.authors),
     };
 };
 

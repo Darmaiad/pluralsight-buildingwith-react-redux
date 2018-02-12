@@ -1,8 +1,6 @@
 import expect from 'expect';
 import React from 'react';
 import { mount, shallow } from 'enzyme';
-import ReactTestUtils from 'react-test-utils';
-import ReactTestRenderer from 'react-test-renderer';
 import CourseForm from './CourseForm';
 import configure from './../../../tools/enzymeSetup';
 
