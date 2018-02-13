@@ -5,7 +5,8 @@ import { bindActionCreators } from 'redux';
 import { toastr } from 'react-redux-toastr';
 import * as courseActions from '../../actions/courseActions';
 import CourseForm from './CourseForm';
-import { authorsFormattedForDropdown } from './../../selectors/selectors';
+import { authorMemoizedSelector } from './../../selectors/selectors';
+// import { authorsFormattedForDropdown } from './../../selectors/selectors';
 
 // While we export default the connected component at the bottom, we also export the class here
 // so we can import it as a named import when testing
@@ -117,7 +118,8 @@ const mapStateToProps = (state, ownProps) => {
 
     return {
         course: course,
-        authors: authorsFormattedForDropdown(state.authors),
+        authors: authorMemoizedSelector(state.authors),
+        // authors: authorsFormattedForDropdown(state.authors),
     };
 };
 

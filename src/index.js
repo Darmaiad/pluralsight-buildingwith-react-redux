@@ -12,7 +12,6 @@ import {loadAuthors} from './actions/authorActions';
 // Webpack can import CSS and Graphics files too
 import './styles/styles.css';
 import './../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import './../node_modules/react-redux-toastr/src/styles/index.scss'; // .scss is needed
 import './favicon.ico';
 const store = configureStore();
 
