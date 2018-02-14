@@ -2,7 +2,7 @@ import expect from 'expect';
 import * as courseActions from './courseActions';
 import * as types from './actionTypes';
 
-// Thunk-specific reports
+// Thunk-specific imports
 import thunk from 'redux-thunk';
 import nock from 'nock';
 import configureMockStore from 'redux-mock-store';
