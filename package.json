@@ -17,7 +17,6 @@
         "build": "babel-node tools/build.js",
         "postbuild": "babel-node tools/distServer.js"
     },
-    "author": "Darmaiad",
     "dependencies": {
         "babel-polyfill": "^6.26.0",
         "bootstrap": "^3.3.7",
@@ -76,6 +75,19 @@
         "webpack-dev-middleware": "1.6.1",
         "webpack-hot-middleware": "2.10.0"
     },
+    "author": "Darmaiad",
+    "keywords": [
+    "react",
+    "redux",
+    "react-redux",
+    "react-router",
+    "webpack",
+    "babel",
+    "es6",
+    "reactjs",
+    "javascript"
+   ],
+    "license": "ISC",
     "repository": {
         "type": "git",
         "url": "https://github.com/Darmaiad/pluralsight-buildingwith-react-redux.git"
