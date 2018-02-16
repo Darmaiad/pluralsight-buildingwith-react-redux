@@ -1,6 +1,6 @@
 # Building Applications with React and Redux in ES6 (Pluralsight)
 
-This project is based on the [Pluralsight](https://www.pluralsight.com/) course [Building Applications with React and Redux in ES6](https://www.pluralsight.com/courses/react-redux-react-router-es6) by [Daniel Stern](https://github.com/danielstern).
+This project is based on the [Pluralsight](https://www.pluralsight.com/) course [Building Applications with React and Redux in ES6](https://www.pluralsight.com/courses/react-redux-react-router-es6) by [Cory House](https://github.com/coryhouse).
 
 ## Installation
 Assuming you have `npm` & `node.js` installed, you can either clone or download the repository. Navigate to the folder that you/was created. Then, run `npm install` on the command line to download the dependencies. Finally, run `npm start` to launch to the project in development mode, or `npm run build` in production mode.
