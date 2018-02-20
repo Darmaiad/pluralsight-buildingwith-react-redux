@@ -12,6 +12,9 @@ import {loadAuthors} from './actions/authorActions';
 // Webpack can import CSS and Graphics files too
 import './styles/styles.css';
 import './../node_modules/bootstrap/dist/css/bootstrap.min.css';
+// react-redux-toastr can work with only the line below, but I implemented it by importing the SASS file
+// import './../node_modules/react-redux-toastr/lib/css/react-redux-toastr.min.css';
+import './../node_modules/react-redux-toastr/src/styles/index.scss';
 import './favicon.ico';
 const store = configureStore();
 
