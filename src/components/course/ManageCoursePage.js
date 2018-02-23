@@ -6,11 +6,14 @@ import { toastr } from 'react-redux-toastr';
 import * as courseActions from '../../actions/courseActions';
 import CourseForm from './CourseForm';
 import { authorMemoizedSelector } from './../../selectors/selectors';
+import { Field, reduxForm } from 'redux-form';
+
 // import { authorsFormattedForDropdown } from './../../selectors/selectors';
 
 // While we export default the connected component at the bottom, we also export the class here
 // so we can import it as a named import when testing
-export class ManageCoursePage extends React.Component {
+// export class ManageCoursePage extends React.Component {
+class ManageCoursePage extends React.Component {
     constructor(props) {
         super(props);
 
@@ -21,8 +24,9 @@ export class ManageCoursePage extends React.Component {
             saving: false,
         };
 
-        this.updateCourseState = this.updateCourseState.bind(this);
+        // this.updateCourseState = this.updateCourseState.bind(this);
         this.saveCourse = this.saveCourse.bind(this);
+        this.onSubmit2 = this.onSubmit2.bind(this);
     }
 
     // This lifecycle hook method will run when React THINKS that the component will receive props
@@ -33,13 +37,13 @@ export class ManageCoursePage extends React.Component {
         }
     }
 
-    updateCourseState(event) {
-        const field = event.target.name;
-        const value = event.target.value;
-        return this.setState((prevState) => ({
-            course: { ...prevState.course, [field]: value },
-        }));
-    }
+    // updateCourseState(event) {
+    //     const field = event.target.name;
+    //     const value = event.target.value;
+    //     return this.setState((prevState) => ({
+    //         course: { ...prevState.course, [field]: value },
+    //     }));
+    // }
 
     courseFormIsValid() {
         let formIsValid = true;
@@ -76,15 +80,23 @@ export class ManageCoursePage extends React.Component {
         this.context.router.history.push('/courses');
     }
 
+    onSubmit2(values) {
+        // print the form values to the console
+        console.log("VALUES: ", values);
+    }
+
     render() {
+      
         return (
             <CourseForm
                 allAuthors={this.props.authors}
-                onChange={this.updateCourseState}
+                // onChange={this.updateCourseState}
                 onSave={this.saveCourse}
                 errors={this.state.errors}
                 saving={this.state.saving}
                 course={this.state.course}
+                onSubmit={this.onSubmit2}
+                initialValues={this.props.initialValues}
             />
         );
     }
@@ -107,16 +119,17 @@ const getCourseById = (courses, id) => {
 
 const mapStateToProps = (state, ownProps) => {
     const courseId = ownProps.match.params.id;
-
+    
     // Initialize course in order to show an empty form when you add a new course
     let course = { id: '', watchHref: '', title: '', authorId: '', length: '', category: '' };
-
+    
     if (courseId && state.courses.length > 0) {
         // If the courseId exists, fetch the course we want to edit
         course = getCourseById(state.courses, courseId);
     }
-
+    
     return {
+        initialValues: course,
         course: course,
         authors: authorMemoizedSelector(state.authors),
         // authors: authorsFormattedForDropdown(state.authors),
@@ -128,3 +141,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ManageCoursePage);
+
+// export default reduxForm({
+//     form: 'thecourse',  // a unique name for this form
+// })(connect(mapStateToProps, mapDispatchToProps)(ManageCoursePage));
