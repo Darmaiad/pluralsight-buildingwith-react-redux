@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import {reducer as toastrReducer} from 'react-redux-toastr';
+import { reducer as formReducer } from 'redux-form';
 import courses from './courseReducer';
 import authors from './authorReducer';
 import ajaxCallsInProgress from './ajaxStatusReducer';
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
     authors,
     ajaxCallsInProgress,
     toastr: toastrReducer,
+    form: formReducer,
 });
 
 export default rootReducer;
