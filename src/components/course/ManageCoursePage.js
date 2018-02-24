@@ -18,38 +18,26 @@ class ManageCoursePage extends React.Component {
         super(props);
 
         this.state = {
-            // Assigning a copy so that the reference does not get passed around
-            course: { ...this.props.course },
             errors: {},
             saving: false,
         };
 
-        // this.updateCourseState = this.updateCourseState.bind(this);
-        this.saveCourse = this.saveCourse.bind(this);
-        this.onSubmit2 = this.onSubmit2.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    // This lifecycle hook method will run when React THINKS that the component will receive props
-    // We need to make a check in the beginning so that we don't make useless state updates
-    componentWillReceiveProps(nextProps) {
-        if (this.props.course.id != nextProps.course.id) {
-            this.setState({ course: { ...nextProps.course } });
-        }
-    }
-
-    // updateCourseState(event) {
-    //     const field = event.target.name;
-    //     const value = event.target.value;
-    //     return this.setState((prevState) => ({
-    //         course: { ...prevState.course, [field]: value },
-    //     }));
+    // This lifecycle hook method will run when React THINKS that the component will receive props.
+    // We need to make a check in the beginning so that we don't make useless state updates.
+    // componentWillReceiveProps(nextProps) {
+    //     if (this.props.initialValues.id != nextProps.initialValues.id) {
+    //         this.setState({ course: { ...nextProps.course } });
+    //     }
     // }
 
-    courseFormIsValid() {
+    courseFormIsValid(courseTitle) {
         let formIsValid = true;
         let errors = {};
 
-        if (this.state.course.title < 5) {
+        if (courseTitle.length < 5) {
             errors.title = 'Title must be at least 5 characters';
             formIsValid = false;
         }
@@ -58,15 +46,19 @@ class ManageCoursePage extends React.Component {
         return formIsValid;
     }
 
-    saveCourse(event) {
-        event.preventDefault();
+    redirect() {
+        this.setState({ saving: false });
+        toastr.success('Course saved');
+        this.context.router.history.push('/courses');
+    }
 
-        if (!this.courseFormIsValid()) {
+    handleSubmit(values) {
+        if (!this.courseFormIsValid(values.title)) {
             return;
         }
 
         this.setState({ saving: true });
-        this.props.actions.saveCourse(this.state.course)
+        this.props.actions.saveCourse(values)
             .then(() => this.redirect())
             .catch(error => {
                 toastr.error(error);
@@ -74,43 +66,18 @@ class ManageCoursePage extends React.Component {
             });
     }
 
-    redirect() {
-        this.setState({ saving: false });
-        toastr.success('Course saved');
-        this.context.router.history.push('/courses');
-    }
-
-    onSubmit2(values) {
-        // print the form values to the console
-        console.log("VALUES: ", values);
-    }
-
     render() {
-      
         return (
             <CourseForm
                 allAuthors={this.props.authors}
-                // onChange={this.updateCourseState}
-                onSave={this.saveCourse}
                 errors={this.state.errors}
                 saving={this.state.saving}
-                course={this.state.course}
-                onSubmit={this.onSubmit2}
+                onSubmit={this.handleSubmit}
                 initialValues={this.props.initialValues}
             />
         );
     }
 }
-
-ManageCoursePage.contextTypes = {
-    router: PropTypes.object,
-};
-
-ManageCoursePage.propTypes = {
-    course: PropTypes.object.isRequired,
-    authors: PropTypes.array.isRequired,
-    actions: PropTypes.object.isRequired,
-};
 
 const getCourseById = (courses, id) => {
     const course = courses.filter(course => course.id == id);
@@ -130,9 +97,9 @@ const mapStateToProps = (state, ownProps) => {
     
     return {
         initialValues: course,
-        course: course,
         authors: authorMemoizedSelector(state.authors),
         // authors: authorsFormattedForDropdown(state.authors),
+        errors: state.errors,
     };
 };
 
@@ -140,8 +107,14 @@ const mapDispatchToProps = (dispatch) => ({
     actions: bindActionCreators(courseActions, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ManageCoursePage);
+ManageCoursePage.contextTypes = {
+    router: PropTypes.object,
+};
 
-// export default reduxForm({
-//     form: 'thecourse',  // a unique name for this form
-// })(connect(mapStateToProps, mapDispatchToProps)(ManageCoursePage));
+ManageCoursePage.propTypes = {
+    initialValues: PropTypes.object.isRequired,
+    authors: PropTypes.array.isRequired,
+    actions: PropTypes.object.isRequired,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ManageCoursePage);

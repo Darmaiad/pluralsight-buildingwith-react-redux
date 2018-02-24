@@ -4,13 +4,16 @@
 // import ReactTestRenderer from 'react-test-renderer';
 // import CourseForm from './CourseForm';
 
+// import configureStore from './../../store/configureStore';
+
+
 // const setup = (submitBtnSaving) => {
+//     const store = configureStore();
 //     const props = {
-//         course: {},
-//         saving: submitBtnSaving,
+//         store: store,
+//         handleSubmit: submitBtnSaving,
+
 //         errors: {},
-//         onSave: () => { },
-//         onChange: () => { },
 //         allAuthors: [],
 //     };
 
@@ -29,21 +32,21 @@
 
 //     it('Renders elements: form and h1', () => {
 //         expect(output.type).toBe('form');
-//         const [firstElem] = output.children ;
-//         expect(firstElem.type).toBe('h1');  
+//         const [firstElem] = output.children;
+//         expect(firstElem.type).toBe('h1');
 //     });
 
-//     it('Save button is labeled \'Save\' when not saving', () => {
-//         submitBtnExpectation(false, 'Save');
-//     });
-    
-//     it('Save button is labeled \'Saving...\' when saving', () => {
-//         submitBtnExpectation(true, 'Saving...');
-//     });
-    
-//     const submitBtnExpectation = (saving, msg ) => {
-//         const { output } = setup(saving);
-//         const submitButton = output.children[5];
-//         expect(submitButton.children[0]).toBe(msg);  
-//     };
+//     // it('Save button is labeled \'Save\' when not saving', () => {
+//     //     submitBtnExpectation(false, 'Save');
+//     // });
+
+//     // it('Save button is labeled \'Saving...\' when saving', () => {
+//     //     submitBtnExpectation(true, 'Saving...');
+//     // });
+
+//     // const submitBtnExpectation = (saving, msg ) => {
+//     //     const { output } = setup(saving);
+//     //     const submitButton = output.children[5];
+//     //     expect(submitButton.children[0]).toBe(msg);  
+//     // };
 // });

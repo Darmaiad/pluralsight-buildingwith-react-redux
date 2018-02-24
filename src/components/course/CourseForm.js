@@ -4,72 +4,57 @@ import { Field, reduxForm } from 'redux-form';
 import TextInput from '../common/TextInput';
 import SelectInput from '../common/SelectInput';
 
-const CourseForm = (props) => {
-    // console.log(props);
-// const CourseForm = ({ course, allAuthors, /* onSave,  onChange, */ saving, errors, handleSubmit, onSubmit }) => {
+const CourseForm = ({ allAuthors, saving, errors, handleSubmit, ...rest }) => {
+    console.log(rest);
     return (
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <h1>Manage Course</h1>
 
             <Field // 'name' prop is required in field
                 name="title"
                 label="Title"
-        
-                // defaultValue={props.initialValues.title}
-                
-                // onChange={onChange}
-                // error={errors.title}
                 component={TextInput}
-
+                error={errors.title}
+                placeholder="Enter the course's title"
             />
 
-            {/* <SelectInput
+            <Field
                 name="authorId"
                 label="Author"
-                value={course.authorId}
                 defaultOption="Select Author"
                 options={allAuthors}
-                // onChange={onChange}
-                error={errors.authorId}
-            /> */}
-
-            {/* <TextInput
+                component={SelectInput}
+            />
+           
+            <Field
                 name="category"
                 label="Category"
-                value={course.category}
-                // onChange={onChange}
-                error={errors.category} /> */}
+                component={TextInput}
+            />
 
-            {/* <TextInput
+            <Field
                 name="length"
                 label="Length"
-                value={course.length}
-                onChange={onChange}
-                error={errors.length} /> */}
+                component={TextInput}
+            />
 
             <button
                 type="submit"
                 name="submit"
-                disabled={props.saving}
+                disabled={saving}
                 className="btn btn-primary"
-            // onClick={onSave}
             >
-                {props.saving ? "Saving..." : "Save"}
+                {saving ? "Saving..." : "Save"}
             </button>
         </form>
     );
 };
 
 CourseForm.propTypes = {
-    course: PropTypes.object.isRequired,
-    allAuthors: PropTypes.array,
-    // onSave: PropTypes.func.isRequired,
-    onSubmit: PropTypes.func.isRequired,
-    // handleSubmit: PropTypes.func.isRequired,
-    // onChange: PropTypes.func.isRequired,
-    saving: PropTypes.bool,
+    handleSubmit: PropTypes.func,
     errors: PropTypes.object,
+    allAuthors: PropTypes.array,
+    saving: PropTypes.bool,
 };
 
-// export default CourseForm;
 export default reduxForm({ form: 'thecourse', enableReinitialize: true })(CourseForm);
