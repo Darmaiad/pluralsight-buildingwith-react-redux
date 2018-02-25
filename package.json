@@ -81,7 +81,7 @@
     "author": "Darmaiad",
     "keywords": [
         "react",
-        "redux",
+        "redux",    
         "react-redux",
         "react-router",
         "webpack",
