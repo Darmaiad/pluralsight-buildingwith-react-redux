@@ -4,8 +4,7 @@ import { Field, reduxForm } from 'redux-form';
 import TextInput from '../common/TextInput';
 import SelectInput from '../common/SelectInput';
 
-const CourseForm = ({ allAuthors, saving, errors, handleSubmit, ...rest }) => {
-    console.log(rest);
+const CourseForm = ({ allAuthors, saving, errors, handleSubmit }) => {
     return (
         <form onSubmit={handleSubmit}>
             <h1>Manage Course</h1>

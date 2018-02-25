@@ -86,6 +86,7 @@
         "react-router",
         "webpack",
         "babel",
+        "redux-form",
         "es6",
         "reactjs",
         "javascript"

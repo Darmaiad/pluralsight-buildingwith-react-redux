@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const SelectInput = ({input: { name, value, onChange }, label, defaultOption,  error, options }) => {
-    return(
+const SelectInput = ({ input: { name, value, onChange }, label, defaultOption, error, options }) => {
+    return (
         <div className="form-group">
             <label htmlFor={name}>{label}</label>
             <div className="field">
@@ -24,7 +24,11 @@ const SelectInput = ({input: { name, value, onChange }, label, defaultOption,  e
 };
 
 SelectInput.propTypes = {
-    input: PropTypes.object,
+    input: PropTypes.shape({
+        name: PropTypes.string,
+        value: PropTypes.string,
+        onChange: PropTypes.func,
+    }).isRequired,
     label: PropTypes.string.isRequired,
     defaultOption: PropTypes.string,
     error: PropTypes.string,

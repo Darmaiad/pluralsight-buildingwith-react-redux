@@ -10,9 +10,6 @@ import { Field, reduxForm } from 'redux-form';
 
 // import { authorsFormattedForDropdown } from './../../selectors/selectors';
 
-// While we export default the connected component at the bottom, we also export the class here
-// so we can import it as a named import when testing
-// export class ManageCoursePage extends React.Component {
 class ManageCoursePage extends React.Component {
     constructor(props) {
         super(props);

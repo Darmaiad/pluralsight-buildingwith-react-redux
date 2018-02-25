@@ -1,1 +1,0 @@
-{"transaction":{"id":250570003,"channelId":7,"type":0,"status":0,"transactionTime":"1519400374036","refId":""},"acceptOdds":1,"acceptPriceChange":true,"bets":[{"selections":[{"partNo":1,"selectionId":"303728279","eventId":7812552,"odds":{"decimal":1.01}}],"stake":{"amount":1,"currency":"EUR"},"system":{"type":"SINGLE"},"winType":"WIN"}],"extBetslipId":"250570003"}
