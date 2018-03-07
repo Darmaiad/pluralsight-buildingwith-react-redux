@@ -84,9 +84,11 @@
         "redux",    
         "react-redux",
         "react-router",
+        "nodejs",
         "webpack",
         "babel",
         "redux-form",
+        "express",
         "es6",
         "reactjs",
         "javascript"
